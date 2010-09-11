@@ -7,7 +7,7 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
-{ #category : '*InfoVis-Core' }
+{ #category : #accessing }
 InfoVisSquarified class >> infoVisName [
 
 	^ 'TM.Squarified'

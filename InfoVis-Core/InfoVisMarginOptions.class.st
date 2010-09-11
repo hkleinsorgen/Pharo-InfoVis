@@ -7,7 +7,7 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
-{ #category : '*InfoVis-Core' }
+{ #category : #accessing }
 InfoVisMarginOptions class >> infoVisName [
 
 	^ 'Margin'

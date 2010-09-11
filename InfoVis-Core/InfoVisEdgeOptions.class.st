@@ -4,7 +4,7 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
-{ #category : '*InfoVis-Core' }
+{ #category : #accessing }
 InfoVisEdgeOptions class >> infoVisName [
 
 	^ 'Edge'

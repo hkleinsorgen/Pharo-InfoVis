@@ -7,7 +7,7 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
-{ #category : '*InfoVis-Core' }
+{ #category : #accessing }
 InfoVisNodeStylesOptions class >> infoVisName [
 
 	^ 'NodeStyles'

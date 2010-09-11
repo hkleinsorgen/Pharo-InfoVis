@@ -7,7 +7,7 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
-{ #category : '*InfoVis-Core' }
+{ #category : #accessing }
 InfoVisObject class >> infoVisName [
 
 	self subclassResponsibility
@@ -27,7 +27,7 @@ InfoVisObject >> optionAt: aKey put: aValue [
 
 { #category : #private }
 InfoVisObject >> options [
-	^ options ifNil: [ options := Grease.GRSmallDictionary new ]
+	^ options ifNil: [ options := GRSmallDictionary new ]
 ]
 
 { #category : #private }
