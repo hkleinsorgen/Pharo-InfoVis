@@ -26,6 +26,12 @@ InfoVisTreeMap >> beVertical [
 	self orientation: 'v'.
 ]
 
+{ #category : #testing }
+InfoVisTreeMap >> canRefresh [
+
+	^ true
+]
+
 { #category : #options }
 InfoVisTreeMap >> constrained: aBoolean [
 	"Default: false.  Whether to show the entire tree when loaded or just the number of levels specified by levelsToShow."

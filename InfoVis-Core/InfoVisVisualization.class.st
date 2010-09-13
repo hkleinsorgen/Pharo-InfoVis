@@ -8,6 +8,13 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
+{ #category : #testing }
+InfoVisVisualization >> canRefresh [
+	" true if refresh() is implemented "
+
+	^ false
+]
+
 { #category : #options }
 InfoVisVisualization >> canvasOptions [
 
@@ -27,9 +34,9 @@ InfoVisVisualization >> edgeOptions [
 ]
 
 { #category : #options }
-InfoVisVisualization >> eventsOptions [
+InfoVisVisualization >> eventOptions [
 
-	^ self optionsObject: InfoVisEventsOptions
+	^ self optionsObject: InfoVisEventOptions
 ]
 
 { #category : #options }
@@ -55,7 +62,7 @@ InfoVisVisualization >> id: aString [
 { #category : #printing }
 InfoVisVisualization >> javascriptContentOn: aStream [ 
 
-	| varJsonName  |
+	| varJsonName |
 	jsonData notNil 
 		ifTrue: 
 		[	varJsonName := 'json' , self variableName.
@@ -68,8 +75,13 @@ InfoVisVisualization >> javascriptContentOn: aStream [
 	JSStream encodeArguments: self arguments on: aStream.
 	jsonData notNil 
 		ifTrue: 
-		[	aStream
-				nextPutAll: ';'; nextPutAll: self variableName; nextPutAll: '.loadJSON('; nextPutAll: varJsonName; nextPutAll: ')'
+		[	aStream nextPutAll: ';'.
+			( self loadJson: ( JSStream on: varJsonName )) javascriptOn: aStream.
+			self canRefresh 
+				ifTrue: 
+				[	aStream nextPutAll: ';'.
+					self refresh javascriptOn: aStream
+				]
 		].
 ]
 
@@ -160,7 +172,7 @@ InfoVisVisualization >> updateJson: anObject [
 { #category : #private }
 InfoVisVisualization >> variableAccess [
 
-	^ self copy alias: self variableName
+	^ self copy jsonData: nil; alias: self variableName
 ]
 
 { #category : #accessing }

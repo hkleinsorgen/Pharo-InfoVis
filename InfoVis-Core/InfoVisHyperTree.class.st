@@ -13,6 +13,12 @@ InfoVisHyperTree class >> infoVisName [
 	^ 'Hypertree'
 ]
 
+{ #category : #testing }
+InfoVisHyperTree >> canRefresh [
+
+	^ true
+]
+
 { #category : #options }
 InfoVisHyperTree >> duration: anObject [
 	"Described in Options.Fx.  It's default value has been changed to 1500."

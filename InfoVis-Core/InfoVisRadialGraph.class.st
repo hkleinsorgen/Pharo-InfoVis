@@ -13,6 +13,12 @@ InfoVisRadialGraph class >> infoVisName [
 	^ 'RGraph'
 ]
 
+{ #category : #testing }
+InfoVisRadialGraph >> canRefresh [
+
+	^ true
+]
+
 { #category : #options }
 InfoVisRadialGraph >> interpolation: aString [
 	"Default: linear.  Describes the way nodes are interpolated.  Possible values are 'linear' and 'polar'."

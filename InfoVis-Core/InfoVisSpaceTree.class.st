@@ -13,6 +13,12 @@ InfoVisSpaceTree class >> infoVisName [
 	^ 'Spacetree'
 ]
 
+{ #category : #testing }
+InfoVisSpaceTree >> canRefresh [
+
+	^ true
+]
+
 { #category : #options }
 InfoVisSpaceTree >> constrained: aBoolean [
 	"Default: true.  Whether to show the entire tree when loaded or just the number of levels specified by levelsToShow."
