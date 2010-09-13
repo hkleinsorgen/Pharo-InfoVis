@@ -4,10 +4,16 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
-{ #category : '*InfoVis-Examples' }
+{ #category : #'instance creation' }
 InfoVisExampleComponent class >> isAbstract [
 
 	^ self = InfoVisExampleComponent
+]
+
+{ #category : #private }
+InfoVisExampleComponent >> firstArgument [
+
+	^ JSStream on: 'arguments[0]'
 ]
 
 { #category : #JSON }
@@ -20,6 +26,12 @@ InfoVisExampleComponent >> jsonUrlFor: aBlock canvas: canvas [
 						document: aBlock value mimeType: WAMimeType textJavascript
 				].
 		]
+]
+
+{ #category : #options }
+InfoVisExampleComponent >> labelSize [
+
+	^ 13
 ]
 
 { #category : #rendering }
@@ -95,23 +107,25 @@ InfoVisExampleComponent >> renderTitleOn: html [
 	html heading level2; with: self title.
 ]
 
-{ #category : #private }
-InfoVisExampleComponent >> setDefaultOptions: aVisualisation [
+{ #category : #options }
+InfoVisExampleComponent >> setDefaultOptions: aVisualisation [ 
 
 	aVisualisation marginOptions
 		top: 5;
 		left: 5;
 		right: 5;
 		bottom: 5.
-	aVisualisation labelOptions 
+	aVisualisation labelOptions
 		renderNative;
-		size: 13;
+		size: self labelSize;
 		family: 'sans-serif';
 		color: 'white'.
-	aVisualisation tipsOptions 
-		renderLikeLabels;
-		enable: true;
-		onShow: self toolTipFunction.
+	self toolTipFunction ifNotNil: 
+		[: toolTipFunction |
+			aVisualisation tipsOptions renderLikeLabels;
+				enable: true;
+				onShow: toolTipFunction
+		].
 ]
 
 { #category : #accessing }
@@ -132,8 +146,14 @@ InfoVisExampleComponent >> title [
 	self subclassResponsibility
 ]
 
-{ #category : #private }
+{ #category : #rendering }
 InfoVisExampleComponent >> toolTipFunction [
 
-	^ ( JSStream on: 'tip.innerHTML = element.name + ": " + element.value' ) asFunction: #( #tip #element )
+	^ nil
+]
+
+{ #category : #rendering }
+InfoVisExampleComponent >> visualizationCssClass [
+
+	^ 'InfoVis'
 ]

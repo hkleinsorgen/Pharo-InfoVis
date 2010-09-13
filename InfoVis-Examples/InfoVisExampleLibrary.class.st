@@ -10,7 +10,7 @@ InfoVisExampleLibrary >> layoutCss [
 	^ '
 div.content {
 	clear: both;
-	width: 900px;
+	width: 1100px;
 	margin: 15px;
 }
 
@@ -25,7 +25,7 @@ div.navigation {
 div.example {
 	position: relative;
 	float: left;
-	width: 600px; 
+	width: 800px; 
 	padding: 5px;
 	margin-left: 15px;
 }
@@ -33,7 +33,7 @@ div.example {
 div.InfoVis {
 	background-color: black;
 	width: 100%;
-	height: 400px;
+	height: 600px;
 }
 div.code {
 	background-color: #EEEEEE;
@@ -123,6 +123,10 @@ InfoVisExampleLibrary >> visCss [
 
 div.tip {
 	display: block;
+	font-size: 0.7em;
+	max-width: 300px;
+	max-height: 200px;
+	overflow: hidden;
 	background-color: white;
 	opacity: 0.7;
 	padding: 5px;
@@ -135,15 +139,18 @@ div.tip {
 div.legend-color {
 	border: 1px solid #AAAAAA;
 	margin: 3px 3px 0 0;
-	padding: 0 0 3px 0;
-	display: inline-block;
+	padding: 0 0 0 0;
 	width: 1em;
 	height: 1em;
+	float: left;
+}
+
+div.legend-label {
+	margin-top: 3px;
 }
 
 li.legend {
 	padding: 3px;
-	vertical-align: middle;
 }
 
 ul.legend {

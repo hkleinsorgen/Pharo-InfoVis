@@ -8,7 +8,7 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
-{ #category : '*InfoVis-Examples' }
+{ #category : #'class initialization' }
 InfoVisExamplesBrowserComponent class >> initialize [
 
 	| app |

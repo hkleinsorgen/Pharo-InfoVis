@@ -4,10 +4,16 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
-{ #category : '*InfoVis-Examples' }
+{ #category : #'instance creation' }
 InfoVisChartComponent class >> isAbstract [
 
 	^ self = InfoVisChartComponent
+]
+
+{ #category : #accessing }
+InfoVisChartComponent >> labels [
+
+	self subclassResponsibility
 ]
 
 { #category : #rendering }
@@ -16,12 +22,35 @@ InfoVisChartComponent >> legendScriptFor: visualization [
 	| script |
 	script := JSStream new.
 	script nextPutAll: '
-		var list = $jit.id(''legend'');
 		var legend = '; nextPutAll: visualization variableName; nextPutAll: '.getLegend();
-		var listItems = [];
-   		 for(var name in legend) {
-     			 listItems.push(''<div class=\"legend-color\" style=\"background-color:'' + legend[name] + ''\">&nbsp;</div>'' + name);
-		}
-		list.innerHTML = ''<li class="legend">'' + listItems.join(''</li><li class="legend">'') + ''</li>'';'.
+		for(var name in legend) 
+			$("div[title="+ name +"]").css("background-color", legend[name])'.
 	^ script
+]
+
+{ #category : #rendering }
+InfoVisChartComponent >> renderLegendOn: html [ 
+
+	html paragraph: 
+		[	html unorderedList id: 'legend';
+				class: 'legend';
+				with: 
+					[	self labels do: 
+							[: label |
+								html listItem class: 'legend';
+									with: 
+										[	html div class: 'legend-color';
+												title: label.
+											html div class: 'legend-label';
+												with: label
+										]
+							]
+					]
+		].
+]
+
+{ #category : #options }
+InfoVisChartComponent >> toolTipFunction [
+
+	^ ( JSStream on: 'tip.innerHTML = element.name + ": " + element.value' ) asFunction: #( #tip #element )
 ]
