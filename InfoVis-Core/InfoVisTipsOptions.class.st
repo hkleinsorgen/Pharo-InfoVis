@@ -24,6 +24,7 @@ InfoVisTipsOptions >> enable: aBoolean [
 InfoVisTipsOptions >> offsetX: aNumber [
 	"Default: 20.  An offset added to the current tooltip x-position (which is the same as the current mouse position).  Default: 20."
 
+	self enable: true.
 	self optionAt: 'offsetX' put: aNumber
 ]
 
@@ -31,6 +32,7 @@ InfoVisTipsOptions >> offsetX: aNumber [
 InfoVisTipsOptions >> offsetY: aNumber [
 	"Default: 20.  An offset added to the current tooltip y-position (which is the same as the current mouse position).  Default: 20."
 
+	self enable: true.
 	self optionAt: 'offsetY' put: aNumber
 ]
 
@@ -39,6 +41,7 @@ InfoVisTipsOptions >> onHide: aFunction [
 	"function arguments: "
 	"This callack is used when hiding a tooltip."
 
+	self enable: true.
 	self optionAt: 'onHide' put: aFunction asFunction
 ]
 
@@ -47,6 +50,7 @@ InfoVisTipsOptions >> onShow: aFunction [
 	"function arguments: tip, node"
 	"This callack is used right before displaying a tooltip.  The first formal parameter is the tip itself (which is a DivElement).  The second parameter may be a Graph.Node for graph based visualizations or an object with label, value properties for charts."
 
+	self enable: true.
 	self optionAt: 'onShow' put: aFunction asFunction
 ]
 
@@ -78,5 +82,6 @@ InfoVisTipsOptions >> renderNative [
 InfoVisTipsOptions >> type: aString [
 	"Default: auto.  Defines where to attach the MouseEnter/Leave tooltip events.  Possible values are 'Native' to attach them to the canvas or 'HTML' to attach them to DOM label elements (if defined).  'auto' sets this property to the value of Options.Label's type property."
 
+	self enable: true.
 	self optionAt: 'type' put: aString
 ]

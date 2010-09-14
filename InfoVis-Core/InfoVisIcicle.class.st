@@ -52,6 +52,20 @@ InfoVisIcicle >> duration: anObject [
 	self optionAt: 'duration' put: anObject
 ]
 
+{ #category : #'functions - convencience' }
+InfoVisIcicle >> enter [
+	" assume that the first argument is passed somehow "
+
+	^ self enter: self firstArgument
+]
+
+{ #category : #functions }
+InfoVisIcicle >> enter: aNode [
+	" Sets the node as root."
+
+	^ self variableAccess call: 'enter' with: aNode
+]
+
 { #category : #options }
 InfoVisIcicle >> fps: anObject [
 	"Described in Options.Fx.  Default: 45."
@@ -92,4 +106,18 @@ InfoVisIcicle >> orientation: aString [
 	"Default: h.  Whether to set horizontal or vertical layouts.  Possible values are 'h' and 'v'."
 
 	self optionAt: 'orientation' put: aString
+]
+
+{ #category : #functions }
+InfoVisIcicle >> out [
+	" Sets the parent node of the current selected node as root.."
+
+	^ self variableAccess call: 'out'
+]
+
+{ #category : #functions }
+InfoVisIcicle >> plot [
+	" Plots the Icicle visualization.  This is a shortcut to fx.plot."
+
+	^ self variableAccess call: 'plot'
 ]

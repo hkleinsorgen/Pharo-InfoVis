@@ -39,6 +39,13 @@ InfoVisVisualization >> eventOptions [
 	^ self optionsObject: InfoVisEventOptions
 ]
 
+{ #category : #private }
+InfoVisVisualization >> firstArgument [
+	" accesses the first argument - useful for event handling "
+
+	^ JSStream on: 'arguments[0]'
+]
+
 { #category : #options }
 InfoVisVisualization >> fxOptions [
 
@@ -140,6 +147,7 @@ InfoVisVisualization >> nodeStylesOptions [
 
 { #category : #functions }
 InfoVisVisualization >> refresh [
+	" note: implemented by many, but not all visualizations - see #canRefresh "
 
 	^ self variableAccess call: 'refresh'
 ]
