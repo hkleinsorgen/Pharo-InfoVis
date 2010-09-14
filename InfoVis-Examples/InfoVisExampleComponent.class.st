@@ -30,6 +30,7 @@ InfoVisExampleComponent >> jsonUrlFor: aBlock canvas: canvas [
 
 { #category : #options }
 InfoVisExampleComponent >> labelSize [
+	" size (px) of labels displayed in the visualization "
 
 	^ 13
 ]

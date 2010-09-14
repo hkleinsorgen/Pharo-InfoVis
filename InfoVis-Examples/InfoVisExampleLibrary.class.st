@@ -54,11 +54,14 @@ InfoVisExampleLibrary >> mainCss [
 
 body {
 	font-family: Tahoma, Helvetica, sans-serif;
+	font-size: 0.9em;
 	color: #444444;
 }
 
 em {
-	font-weight: bold;
+	font-weight: normal;
+	font-style: normal;
+	color: #1BA6DF;
 }
 
 a {
@@ -105,6 +108,7 @@ li.navigation {
 	padding-left: 10px;
 	margin: 5px;
 	height: 1.5em;
+	font-size: 1.1em;
 }
 
 '
