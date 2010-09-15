@@ -56,11 +56,13 @@ InfoVis >> id: aString [
 ]
 
 { #category : #convenience }
-InfoVis >> id: id on: anEventName do: anOject [
+InfoVis >> id: id on: anEventName do: anOject [ 
 	" Cross-browser add event listener.
 	It's not necessary to use this function, it's just for convenience "
 
-	^ (self access: 'util') call: 'addEvent' with: (self id: id) with: anEventName with: anOject asFunction
+	| node |
+	node := self copy id: id.
+	^ ( self access: 'util' ) call: 'addEvent' with: node with: anEventName with: anOject asFunction
 ]
 
 { #category : #printing }

@@ -10,5 +10,5 @@ Class {
 { #category : #printing }
 InfoVisOptions >> javascriptContentOn: aStream [ 
 
-	JSStream encodeArguments: self arguments on: aStream
+	self options javascriptOn: aStream
 ]

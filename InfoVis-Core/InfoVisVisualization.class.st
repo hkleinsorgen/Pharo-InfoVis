@@ -8,6 +8,13 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
+{ #category : #'options - canvas' }
+InfoVisVisualization >> background: aBooleanOrObject [
+	"Default: false.  An object containing information about the rendering of a background canvas."
+
+	self optionAt: 'background' put: aBooleanOrObject
+]
+
 { #category : #testing }
 InfoVisVisualization >> canRefresh [
 	" true if refresh() is implemented "
@@ -15,25 +22,19 @@ InfoVisVisualization >> canRefresh [
 	^ false
 ]
 
-{ #category : #options }
-InfoVisVisualization >> canvasOptions [
-
-	^ self optionsObject: InfoVisCanvasOptions
-]
-
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> controllerOptions [
 
 	^ self optionsObject: InfoVisControllerOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> edgeOptions [
 
 	^ self optionsObject: InfoVisEdgeOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> eventOptions [
 
 	^ self optionsObject: InfoVisEventOptions
@@ -46,24 +47,33 @@ InfoVisVisualization >> firstArgument [
 	^ JSStream on: 'arguments[0]'
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> fxOptions [
 
 	^ self optionsObject: InfoVisFxOptions
 ]
 
-{ #category : #functions }
-InfoVisVisualization >> getLegend [
-	" Returns an object containing as keys the legend names and as values hex strings with color values. "
+{ #category : #'options - canvas' }
+InfoVisVisualization >> height: aNumber [
+	"Default: to the container's offsetHeight.  The height of the canvas."
 
-	^ self variableAccess call: 'getLegend'
+	self optionAt: 'height' put: aNumber
 ]
 
 { #category : #accessing }
 InfoVisVisualization >> id: aString [
 	" attaches the visualization to a brush "
 
-	self optionAt: 'injectInto' put: aString
+	self injectInto: aString
+]
+
+{ #category : #'options - canvas' }
+InfoVisVisualization >> injectInto: aStringOrElement [
+	"Required. The id of the DOM container for the visualization.  It can also be an Element provided that it has an id."
+
+	" Note: automatically set when attaching the visualization to a brush "
+
+	self optionAt: 'injectInto' put: aStringOrElement
 ]
 
 { #category : #printing }
@@ -75,9 +85,9 @@ InfoVisVisualization >> javascriptContentOn: aStream [
 		[	varJsonName := 'json' , self variableName.
 			aStream nextPutAll: 'var '; nextPutAll: varJsonName; nextPutAll: '='.
 			jsonData jsonOn: aStream.
-			aStream nextPutAll: ';'
+			aStream nextPutAll: '; '
 		].
-	aStream nextPutAll: ' var '; nextPutAll: self variableName; nextPutAll: '='.
+	aStream nextPutAll: 'var '; nextPutAll: self variableName; nextPutAll: '='.
 	aStream nextPutAll: 'new $jit.'; nextPutAll: self class infoVisName.
 	JSStream encodeArguments: self arguments on: aStream.
 	jsonData notNil 
@@ -101,7 +111,7 @@ InfoVisVisualization >> jsonData: aDataCollection [
 	jsonData := aDataCollection.
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> labelOptions [
 
 	^ self optionsObject: InfoVisLabelOptions
@@ -121,25 +131,25 @@ InfoVisVisualization >> loadJson: anObject [
 	^ self variableAccess call: 'loadJSON' with: anObject
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> marginOptions [
 
 	^ self optionsObject: InfoVisMarginOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> navigationOptions [
 
 	^ self optionsObject: InfoVisNavigationOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> nodeOptions [
 
 	^ self optionsObject: InfoVisNodeOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> nodeStylesOptions [
 
 	^ self optionsObject: InfoVisNodeStylesOptions
@@ -152,13 +162,13 @@ InfoVisVisualization >> refresh [
 	^ self variableAccess call: 'refresh'
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> tipsOptions [
 
 	^ self optionsObject: InfoVisTipsOptions
 ]
 
-{ #category : #options }
+{ #category : #'options - categories' }
 InfoVisVisualization >> treeOptions [
 
 	^ self optionsObject: InfoVisTreeOptions
@@ -177,6 +187,13 @@ InfoVisVisualization >> updateJson: anObject [
 	^ self variableAccess call: 'updateJSON' with: anObject
 ]
 
+{ #category : #'options - canvas' }
+InfoVisVisualization >> useCanvas: aBooleanOrObject [
+	"Default: false.  You can pass another Canvas instance to be used by the visualization."
+
+	self optionAt: 'useCanvas' put: aBooleanOrObject
+]
+
 { #category : #private }
 InfoVisVisualization >> variableAccess [
 
@@ -185,8 +202,29 @@ InfoVisVisualization >> variableAccess [
 
 { #category : #accessing }
 InfoVisVisualization >> variableName [
+	" the variable the holds the visualization object "
 
 	variableName isNil 
 		ifTrue: [ variableName := 'infoVis' , self renderContext callbacks advanceKey ].
 	^ variableName
+]
+
+{ #category : #private }
+InfoVisVisualization >> variableName: aString [
+
+	variableName := aString
+]
+
+{ #category : #'options - canvas' }
+InfoVisVisualization >> width: aNumber [
+	"Default: to the container's offsetWidth.  The width of the canvas."
+
+	self optionAt: 'width' put: aNumber
+]
+
+{ #category : #'options - canvas' }
+InfoVisVisualization >> withLabels: aBoolean [
+	"Default: true.  Whether to use a label container for the visualization."
+
+	self optionAt: 'withLabels' put: aBoolean
 ]

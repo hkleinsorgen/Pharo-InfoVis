@@ -20,6 +20,24 @@ InfoVisNodeOptions >> align: aString [
 	self optionAt: 'align' put: aString
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> alignCenter [
+
+	self align: 'center'
+]
+
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> alignLeft [
+
+	self align: 'left'
+]
+
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> alignRight [
+
+	self align: 'right'
+]
+
 { #category : #options }
 InfoVisNodeOptions >> alpha: aNumber [
 	"Default: 1.  The Node's alpha value.  1 is for full opacity."
@@ -55,6 +73,12 @@ InfoVisNodeOptions >> canvasStyles: aObject [
 	self optionAt: 'CanvasStyles' put: aObject
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> circle [
+
+	self type: 'circle'
+]
+
 { #category : #options }
 InfoVisNodeOptions >> color: aString [
 	"Default: #ccb.  Node color."
@@ -67,6 +91,12 @@ InfoVisNodeOptions >> dim: aNumber [
 	"Default: 3.  An extra parameter used by other node shapes such as circle or square, to determine the shape's diameter."
 
 	self optionAt: 'dim' put: aNumber
+]
+
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> ellipse [
+
+	self type: 'ellipse'
 ]
 
 { #category : #options }
@@ -90,6 +120,12 @@ InfoVisNodeOptions >> overridable: aBoolean [
 	self optionAt: 'overridable' put: aBoolean
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> rectangle [
+
+	self type: 'rectangle'
+]
+
 { #category : #options }
 InfoVisNodeOptions >> span: aNumber [
 	"Default: 1.  Used in radial layouts (like RGraph or Sunburst visualizations).  The angle span amount set for a node."
@@ -97,11 +133,29 @@ InfoVisNodeOptions >> span: aNumber [
 	self optionAt: 'span' put: aNumber
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> square [
+
+	self type: 'square'
+]
+
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> star [
+
+	self type: 'star'
+]
+
 { #category : #options }
 InfoVisNodeOptions >> transform: aBoolean [
 	"Default: true.  Only used by the Hypertree visualization.  Whether to scale the nodes according to the moebius transformation."
 
 	self optionAt: 'transform' put: aBoolean
+]
+
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> triangle [
+
+	self type: 'triangle'
 ]
 
 { #category : #options }

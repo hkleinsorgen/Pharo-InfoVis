@@ -3,7 +3,7 @@ A visualization that displays stacked area charts.
 "
 Class {
 	#name : #InfoVisAreaChart,
-	#superclass : #InfoVisVisualization,
+	#superclass : #InfoVisChart,
 	#category : 'InfoVis-Core'
 }
 
@@ -20,16 +20,11 @@ InfoVisAreaChart >> animate: aBoolean [
 	self optionAt: 'animate' put: aBoolean
 ]
 
-{ #category : #'options - convenience' }
-InfoVisAreaChart >> displayStacked [
+{ #category : #functions }
+InfoVisAreaChart >> filter: filterStrings [
+	" Filter selected stacks, collapsing all other stacks.  You can filter multiple stacks at the same time."
 
-	self type: 'stacked'
-]
-
-{ #category : #'options - convenience' }
-InfoVisAreaChart >> displayStackedWithGradients [
-
-	self type: 'stacked:gradient'
+	^ self variableAccess call: 'filter' withArguments: filterStrings
 ]
 
 { #category : #options }
@@ -44,6 +39,13 @@ InfoVisAreaChart >> labelOffset: aNumber [
 	"Default: 3.  Adds margin between the label and the default place where it should be drawn."
 
 	self optionAt: 'labelOffset' put: aNumber
+]
+
+{ #category : #functions }
+InfoVisAreaChart >> restore [
+	" Sets all stacks that could have been filtered visible."
+
+	^ self variableAccess call: 'restore'
 ]
 
 { #category : #options }

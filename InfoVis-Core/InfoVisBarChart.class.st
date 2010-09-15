@@ -3,7 +3,7 @@ A visualization that displays stacked bar charts
 "
 Class {
 	#name : #InfoVisBarChart,
-	#superclass : #InfoVisVisualization,
+	#superclass : #InfoVisChart,
 	#category : 'InfoVis-Core'
 }
 
@@ -49,18 +49,6 @@ InfoVisBarChart >> displayGrouped [
 InfoVisBarChart >> displayGroupedWithGradients [
 
 	self type: 'grouped:gradient'
-]
-
-{ #category : #'options - convenience' }
-InfoVisBarChart >> displayStacked [
-
-	self type: 'stacked'
-]
-
-{ #category : #'options - convenience' }
-InfoVisBarChart >> displayStackedWithGradients [
-
-	self type: 'stacked:gradient'
 ]
 
 { #category : #options }
