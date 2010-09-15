@@ -4,33 +4,6 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
-{ #category : #JSON }
-InfoVisAreaChartComponent >> jsonData [
-
-	| data values entryLabels entryValues |
-	values := OrderedCollection new.
-	entryLabels := #( '1960' '1970' '1980' '1990' '2000' '2010' ).
-	entryValues := #( #( 20 40 15 5 ) #( 30 10 45 10 ) #( 38 20 35 17 ) #( 58 10 35 32 ) #( 55 60 34 38 ) #( 26 40 25 40 )).
-	entryLabels 
-		with: entryValues
-		do: 
-		[: l : v |
-			values add: ( Dictionary new at: 'label' put: l;
-						at: 'values' put: v;
-						yourself )
-		].
-	data := Dictionary new.
-	data at: 'label' put: self labels.
-	data at: 'values' put: values.
-	^ data
-]
-
-{ #category : #accessing }
-InfoVisAreaChartComponent >> labels [
-
-	^ #( 'Stuff' 'Thingies' 'Entities' 'Items' )
-]
-
 { #category : #rendering }
 InfoVisAreaChartComponent >> renderExampleOn: html [ 
 

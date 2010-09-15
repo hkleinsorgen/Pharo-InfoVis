@@ -4,6 +4,12 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
+{ #category : #accessing }
+InfoVisOverviewComponent >> category [
+
+	^ ''
+]
+
 { #category : #rendering }
 InfoVisOverviewComponent >> renderExplanationOn: html [
 

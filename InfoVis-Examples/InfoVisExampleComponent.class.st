@@ -10,6 +10,12 @@ InfoVisExampleComponent class >> isAbstract [
 	^ self = InfoVisExampleComponent
 ]
 
+{ #category : #accessing }
+InfoVisExampleComponent >> category [
+
+	self subclassResponsibility
+]
+
 { #category : #private }
 InfoVisExampleComponent >> firstArgument [
 

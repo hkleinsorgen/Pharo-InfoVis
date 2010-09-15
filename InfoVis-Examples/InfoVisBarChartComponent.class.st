@@ -30,12 +30,6 @@ InfoVisBarChartComponent >> jsonData [
 	^ data
 ]
 
-{ #category : #JSON }
-InfoVisBarChartComponent >> jsonDataUrlFor: canvas [
-
-	^ self jsonUrlFor: [ self jsonData asJson ] canvas: canvas
-]
-
 { #category : #accessing }
 InfoVisBarChartComponent >> labels [
 
@@ -59,10 +53,11 @@ InfoVisBarChartComponent >> renderExampleOn: html [
 	html div class: self visualizationCssClass;
 		script: chart.
 	self renderLegendOn: html.
+	" load data "
 	html document addLoadScript: 
-		( html jQuery getJson 
-			url: ( self jsonDataUrlFor: html );
-			onComplete: chart loadJson , ( self legendScriptFor: chart )).
+		( html jQuery getJson infoVisJson: [ self jsonData ];
+			onComplete: chart loadJson,
+				 ( self legendScriptFor: chart )).
 ]
 
 { #category : #rendering }

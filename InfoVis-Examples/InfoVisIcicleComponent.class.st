@@ -41,15 +41,16 @@ InfoVisIcicleComponent >> renderExampleOn: html [
 	html div class: self visualizationCssClass;
 		script: icicle.
 	" load initial data "
-	html document addLoadScript: ( html jQuery getJson infoVisJson: [ self jsonForClass: Collection ];
-				onComplete: icicle loadJson , icicle refresh ).
+	html document addLoadScript: 
+		( html jQuery getJson infoVisJson: [ self jsonForClass: Collection ];
+			onComplete: icicle loadJson , icicle refresh ).
 ]
 
 { #category : #rendering }
 InfoVisIcicleComponent >> renderExplanationOn: html [
 
 	html 
-		text:'A space filling visualization. The width is fixed, the height visualizes the number of subclasses. Different colors represent different types of classes (indexed, instVars). ';
+		text:'A space filling visualization. The width is fixed, the height visualizes the number of subclasses. Different colors represent different types of classes. ';
 		emphasis: 'Left click'; text: ' to dive, ';
 		emphasis: 'right click'; text: ' to navigate to the parent'.
 ]

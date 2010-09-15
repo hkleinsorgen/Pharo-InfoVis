@@ -21,6 +21,12 @@ InfoVisSpaceFillingComponent >> addSize: data toData: classSize [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+InfoVisSpaceFillingComponent >> category [
+
+	^ 'Space filling trees'
+]
+
 { #category : #private }
 InfoVisSpaceFillingComponent >> classes [
 
@@ -31,12 +37,12 @@ InfoVisSpaceFillingComponent >> classes [
 { #category : #options }
 InfoVisSpaceFillingComponent >> colorOfClass: aClass [ 
 
-	^ aClass isVariable 
-		ifTrue: [ '#88CC88' ]
+	^ aClass isBits 
+		ifTrue: [ '#5B69FF' ]
 		ifFalse: 
-		[	aClass instSize > 0  
-				ifTrue: [ '#88CCCC' ]
-				ifFalse: [ '#88CCAA' ]
+		[	aClass isVariable
+				ifTrue: [ '#5BB5FF' ]
+				ifFalse: [ '#47C676' ]
 		]
 ]
 

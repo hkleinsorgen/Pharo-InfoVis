@@ -20,16 +20,25 @@ InfoVisExamplesBrowserComponent class >> initialize [
 	^ app
 ]
 
+{ #category : #accessing }
+InfoVisExamplesBrowserComponent >> categories [
+
+	^ self exampleComponents keys asSortedCollection
+]
+
 { #category : #hooks }
 InfoVisExamplesBrowserComponent >> children [
 
-	^ self exampleComponents
+	| children |
+	children := Set new.
+	self exampleComponents do: [: components | children addAll: components ].
+	^ children
 ]
 
 { #category : #accessing }
 InfoVisExamplesBrowserComponent >> currentComponent [
 
-	^ currentComponent ifNil: [ currentComponent := self exampleComponents first ].
+	^ currentComponent ifNil: [ currentComponent := (self exampleComponents at: self categories first) first ].
 ]
 
 { #category : #accessing }
@@ -43,8 +52,13 @@ InfoVisExamplesBrowserComponent >> exampleComponents [
 
 	exampleComponents isNil 
 		ifTrue: 
-		[	exampleComponents := (( InfoVisExampleComponent allSubclasses reject: [ : class | class isAbstract ]) collect: [: class | class new ]) 
-					asSortedCollection: [: c1 : c2 | c1 sortKey <= c2 sortKey ]
+		[	exampleComponents := Dictionary new.
+			( InfoVisExampleComponent allSubclasses reject: [: class | class isAbstract ]) do: 
+				[: class | | component components |
+					component := class new.
+					components := exampleComponents at: component category ifAbsentPut: [ SortedCollection sortBlock: [: c1 : c2 | c1 sortKey <= c2 sortKey ]].
+					components add: component
+				]
 		].
 	^ exampleComponents
 ]
@@ -70,17 +84,24 @@ InfoVisExamplesBrowserComponent >> renderExampleOn: html [
 { #category : #rendering }
 InfoVisExamplesBrowserComponent >> renderNavigationOn: html [ 
 
-	html heading level2; with:  'InfoVis'.
-	html unorderedList class: 'navigation'; with: 
-		[	self exampleComponents do: 
-				[: component |
-					html listItem class: 'navigation'; with: 
-						[	html anchor class: ( component = self currentComponent 
-											ifTrue: [ 'selection' ]
-											ifFalse: [ 'navigation' ]);
-								callback: [ self currentComponent: component ];
-								with: [ component title renderOn: html ]
-						]
-				]
+	html heading level2;
+		with: 'InfoVis'.
+	self categories do:
+		[: category  |
+			html heading level3; with: category.
+			html unorderedList class: 'navigation';
+				with: 
+					[	(self exampleComponents at: category) do: 
+							[: component |
+								html listItem class: 'navigation';
+									with: 
+										[	html anchor class: ( component = self currentComponent 
+															ifTrue: [ 'selection' ]
+															ifFalse: [ 'navigation' ]);
+												callback: [ self currentComponent: component ];
+												with: [ component title renderOn: html ]
+										]
+							]
+					]
 		].
 ]
