@@ -2,7 +2,7 @@ Class {
 	#name : #InfoVisSpaceFillingComponent,
 	#superclass : #InfoVisExampleComponent,
 	#instVars : [
-		'links',
+		'passengers',
 		'nextID',
 		'classes'
 	],
@@ -16,9 +16,7 @@ InfoVisSpaceFillingComponent class >> isAbstract [
 ]
 
 { #category : #JSON }
-InfoVisSpaceFillingComponent >> addSize: data toData: classSize [ 
-
-	self subclassResponsibility
+InfoVisSpaceFillingComponent >> addSize: data toData: classSize [
 ]
 
 { #category : #accessing }
@@ -40,7 +38,7 @@ InfoVisSpaceFillingComponent >> colorOfClass: aClass [
 	^ aClass isBits 
 		ifTrue: [ '#5B69FF' ]
 		ifFalse: 
-		[	aClass isVariable
+		[	aClass isVariable 
 				ifTrue: [ '#5BB5FF' ]
 				ifFalse: [ '#47C676' ]
 		]
@@ -50,7 +48,7 @@ InfoVisSpaceFillingComponent >> colorOfClass: aClass [
 InfoVisSpaceFillingComponent >> commentOfClass: aClass [ 
 
 	| comment |
-	comment := aClass comment ifNil: [ '' ].
+	comment := aClass comment ifNotNil: [ : c | c asString ] ifNil: [ '' ].
 	^ comment size > 80 
 		ifTrue: [( comment copyFrom: 1 to: 80 ) , '...' ]
 		ifFalse: [ comment ]
@@ -60,6 +58,20 @@ InfoVisSpaceFillingComponent >> commentOfClass: aClass [
 InfoVisSpaceFillingComponent >> depth [
 
 	self subclassResponsibility
+]
+
+{ #category : #private }
+InfoVisSpaceFillingComponent >> idForPassenger: anObject [ 
+
+	^ self classes at: anObject ifAbsentPut: [
+		| link |
+		nextID := nextID isNil 
+				ifTrue: [ 1 ]
+				ifFalse: [ nextID + 1 ].
+		link := nextID printString.
+		self passengers at: link put: anObject.
+		link
+	].
 ]
 
 { #category : #JSON }
@@ -78,7 +90,7 @@ InfoVisSpaceFillingComponent >> jsonForClass: aClass depth: depth [
 	self addSize: data toData: classSize.
 	data at: '$color' put: ( self colorOfClass: aClass ).
 	data at: 'comment' put: ( self commentOfClass: aClass ).
-	data at: 'link' put: ( self linkToClass: aClass ).
+	data at: 'link' put: ( self idForPassenger: aClass ).
 	children := depth > 0 
 			ifTrue: 
 			[( aClass subclasses asSortedCollection: [: c1 : c2 | c1 name <= c2 name ]) collect: [: c | self jsonForClass: c depth: depth - 1 ]
@@ -96,7 +108,7 @@ InfoVisSpaceFillingComponent >> jsonForClass: aClass depth: depth [
 InfoVisSpaceFillingComponent >> jsonForLink: aString [
 	
 	| class |
-	class := self links at: aString.
+	class := self passengerAt: aString.
 	^ self jsonForClass: class
 ]
 
@@ -107,24 +119,16 @@ InfoVisSpaceFillingComponent >> labelSize [
 ]
 
 { #category : #private }
-InfoVisSpaceFillingComponent >> linkToClass: aClass [ 
+InfoVisSpaceFillingComponent >> passengerAt: id [
 
-	^ self classes at: aClass ifAbsentPut: [
-		| link |
-		nextID := nextID isNil 
-				ifTrue: [ 1 ]
-				ifFalse: [ nextID + 1 ].
-		link := nextID printString.
-		self links at: link put: aClass.
-		link
-	].
+	^ self passengers at: id ifAbsent: [ nil ]
 ]
 
 { #category : #private }
-InfoVisSpaceFillingComponent >> links [
+InfoVisSpaceFillingComponent >> passengers [
 
-	links isNil ifTrue: [ links := Dictionary new: 1000 ].
-	^ links
+	passengers isNil ifTrue: [ passengers := Dictionary new: 1000 ].
+	^ passengers
 ]
 
 { #category : #rendering }
