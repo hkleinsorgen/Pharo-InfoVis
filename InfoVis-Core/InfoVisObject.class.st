@@ -21,6 +21,14 @@ InfoVisObject >> arguments [
 ]
 
 { #category : #private }
+InfoVisObject >> infoVis [
+
+	^ (InfoVis context: self renderContext)
+		rendererClass: self species;
+		yourself
+]
+
+{ #category : #private }
 InfoVisObject >> optionAt: aKey put: aValue [
 	^ self options at: aKey put: aValue
 ]

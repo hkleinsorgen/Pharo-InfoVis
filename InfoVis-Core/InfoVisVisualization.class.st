@@ -28,6 +28,13 @@ InfoVisVisualization >> controllerOptions [
 	^ self optionsObject: InfoVisControllerOptions
 ]
 
+{ #category : #private }
+InfoVisVisualization >> createVariable [
+	" the variable the holds the visualization object "
+
+	^ variableName := 'infoVis' , self renderContext callbacks advanceKey
+]
+
 { #category : #'options - categories' }
 InfoVisVisualization >> edgeOptions [
 
@@ -64,6 +71,7 @@ InfoVisVisualization >> height: aNumber [
 InfoVisVisualization >> id: aString [
 	" attaches the visualization to a brush "
 
+	self variableNameNeeded.
 	self injectInto: aString
 ]
 
@@ -82,12 +90,13 @@ InfoVisVisualization >> javascriptContentOn: aStream [
 	| varJsonName |
 	jsonData notNil 
 		ifTrue: 
-		[	varJsonName := 'json' , self variableName.
+		[	varJsonName := 'json' , self variableNameNeeded.
 			aStream nextPutAll: 'var '; nextPutAll: varJsonName; nextPutAll: '='.
 			jsonData jsonOn: aStream.
 			aStream nextPutAll: '; '
 		].
-	aStream nextPutAll: 'var '; nextPutAll: self variableName; nextPutAll: '='.
+	self variableName notNil 
+		ifTrue: [ aStream nextPutAll: 'var '; nextPutAll: self variableName; nextPutAll: '=' ].
 	aStream nextPutAll: 'new $jit.'; nextPutAll: self class infoVisName.
 	JSStream encodeArguments: self arguments on: aStream.
 	jsonData notNil 
@@ -119,9 +128,9 @@ InfoVisVisualization >> labelOptions [
 
 { #category : #functions }
 InfoVisVisualization >> loadJson [
-	" assume that the first argument is the JSON data. " 
+	" assume that the first argument is the JSON data. "
 
-	^ self loadJson: (JSStream on: 'arguments[0]')
+	^ self loadJson: self firstArgument
 ]
 
 { #category : #functions }
@@ -176,9 +185,9 @@ InfoVisVisualization >> treeOptions [
 
 { #category : #functions }
 InfoVisVisualization >> updateJson [
-	" assume that the first argument is the JSON data. " 
+	" assume that the first argument is the JSON data. "
 
-	^ self updateJson: (JSStream on: 'arguments[0]')
+	^ self updateJson: self firstArgument
 ]
 
 { #category : #functions }
@@ -197,15 +206,13 @@ InfoVisVisualization >> useCanvas: aBooleanOrObject [
 { #category : #private }
 InfoVisVisualization >> variableAccess [
 
-	^ self copy jsonData: nil; alias: self variableName
+	^ self copy jsonData: nil; alias: self variableNameNeeded
 ]
 
 { #category : #accessing }
 InfoVisVisualization >> variableName [
 	" the variable the holds the visualization object "
 
-	variableName isNil 
-		ifTrue: [ variableName := 'infoVis' , self renderContext callbacks advanceKey ].
 	^ variableName
 ]
 
@@ -213,6 +220,12 @@ InfoVisVisualization >> variableName [
 InfoVisVisualization >> variableName: aString [
 
 	variableName := aString
+]
+
+{ #category : #private }
+InfoVisVisualization >> variableNameNeeded [
+
+	^ self variableName ifNil: [ self createVariable ]
 ]
 
 { #category : #'options - canvas' }

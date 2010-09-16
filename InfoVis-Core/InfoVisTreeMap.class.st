@@ -7,6 +7,12 @@ Class {
 	#category : 'InfoVis-Core'
 }
 
+{ #category : #accessing }
+InfoVisTreeMap class >> layoutName [
+
+	^ '$jit.Layouts.', self infoVisName
+]
+
 { #category : #options }
 InfoVisTreeMap >> animate: aBoolean [
 	"Default: false.  Whether to animate transitions."
@@ -46,11 +52,56 @@ InfoVisTreeMap >> duration: anObject [
 	self optionAt: 'duration' put: anObject
 ]
 
+{ #category : #'functions - convencience' }
+InfoVisTreeMap >> enter [
+	" assume that the first argument is passed somehow "
+
+	^ self enter: self firstArgument
+]
+
+{ #category : #functions }
+InfoVisTreeMap >> enter: aNode [
+	" Sets the node as root."
+
+	^ self variableAccess call: 'enter' with: aNode
+]
+
+{ #category : #'extend - convencience' }
+InfoVisTreeMap >> extendWithClass: aTreeMapClass [
+	
+	^ self infoVis extend: self with: (JSStream on: aTreeMapClass layoutName) create
+]
+
+{ #category : #'extend - convencience' }
+InfoVisTreeMap >> extendWithSliceAndDice [
+	
+	^ self extendWithClass: InfoVisSliceAndDice
+]
+
+{ #category : #'extend - convencience' }
+InfoVisTreeMap >> extendWithSquarified [
+	
+	^ self extendWithClass: InfoVisSquarified
+]
+
+{ #category : #'extend - convencience' }
+InfoVisTreeMap >> extendWithStrip [
+	
+	^ self extendWithClass: InfoVisStrip
+]
+
 { #category : #options }
 InfoVisTreeMap >> fps: anObject [
 	"Described in Options.Fx.  Default: 45."
 
 	self optionAt: 'fps' put: anObject
+]
+
+{ #category : #functions }
+InfoVisTreeMap >> leaf: aNode [
+	" Returns whether the node is a leaf."
+
+	^ self variableAccess call: 'leaf' with: aNode
 ]
 
 { #category : #options }
@@ -79,6 +130,20 @@ InfoVisTreeMap >> orientation: aString [
 	"Default: h.  Whether to set horizontal or vertical layouts.  Possible values are 'h' and 'v'."
 
 	self optionAt: 'orientation' put: aString
+]
+
+{ #category : #functions }
+InfoVisTreeMap >> out [
+	" Sets the parent node of the current selected node as root.."
+
+	^ self variableAccess call: 'out'
+]
+
+{ #category : #functions }
+InfoVisTreeMap >> plot [
+	" Plots the Icicle visualization.  This is a shortcut to fx.plot."
+
+	^ self variableAccess call: 'plot'
 ]
 
 { #category : #options }

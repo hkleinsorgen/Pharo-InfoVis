@@ -26,6 +26,13 @@ InfoVis >> create: anInfoVisClass [
 		yourself
 ]
 
+{ #category : #convenience }
+InfoVis >> extend: aVisualization with: anotherObject [
+	"Augment an object by appending another object's properties. "
+
+	^ (self access: 'util') call: 'extend' with: aVisualization variableAccess with: anotherObject
+]
+
 { #category : #creation }
 InfoVis >> forceDirected [
 	" A visualization that lays graphs using a Force-Directed layout algorithm. "
