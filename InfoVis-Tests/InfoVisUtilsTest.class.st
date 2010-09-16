@@ -13,6 +13,14 @@ InfoVisUtilsTest >> testEvent [
 ]
 
 { #category : #tests }
+InfoVisUtilsTest >> testExtend [
+
+	self 
+		assert: (self infoVis sliceAndDice extendWithClass: InfoVisSliceAndDice)
+		equals: '$jit.util.extend(infoVis1,new $jit.Layouts.TM.SliceAndDice)'
+]
+
+{ #category : #tests }
 InfoVisUtilsTest >> testId [
 
 	self 
