@@ -129,7 +129,7 @@ InfoVisExampleComponent >> setDefaultOptions: aVisualisation [
 		color: 'white'.
 	self toolTipFunction ifNotNil: 
 		[: toolTipFunction |
-			aVisualisation tipsOptions renderLikeLabels;
+			aVisualisation tipOptions renderLikeLabels;
 				enable: true;
 				onShow: toolTipFunction
 		].

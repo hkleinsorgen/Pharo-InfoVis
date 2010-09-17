@@ -22,7 +22,7 @@ InfoVisSunBurstComponent >> labelSize [
 	^ 10
 ]
 
-{ #category : #rendering }
+{ #category : #accessing }
 InfoVisSunBurstComponent >> renderExampleOn: html [ 
 
 	| sunBurst |
@@ -31,9 +31,9 @@ InfoVisSunBurstComponent >> renderExampleOn: html [
 		levelDistance: 100;
 		displayMultipieWithGradients.
 	sunBurst nodeOptions overridable: true.
-	sunBurst nodeStylesOptions
-		hoverColor: ColorValue  orange;
-		clickColor: ColorValue red.
+	sunBurst nodeStyleOptions
+		hoverColor: Color orange;
+		clickColor: Color red.
 	sunBurst eventOptions 
 		onClick: ( 
 			sunBurst 
@@ -49,7 +49,7 @@ InfoVisSunBurstComponent >> renderExampleOn: html [
 	self setDefaultOptions: sunBurst.
 	html div class: self visualizationCssClass;
 		script: sunBurst.
-	" load initial data "
+	" load data "
 	html document addLoadScript: (html jQuery getJson 
 				infoVisJson: [  self jsonForClass: Collection ];
 				onComplete: sunBurst loadJson, sunBurst refresh).

@@ -66,9 +66,10 @@ InfoVisTreeMapComponent >> renderExampleOn: html [
 	| treeMap |
 	treeMap := html infoVis squarified.
 	treeMap 
-		animate: false;
+		animate: true;
 		titleHeight: 12;
-		offset: 1.
+		offset: 1;
+		displayCushions.
 	treeMap nodeOptions overridable: true.
 	treeMap eventOptions 
 		onClick: treeMap enter asFunction;
@@ -78,7 +79,7 @@ InfoVisTreeMapComponent >> renderExampleOn: html [
 	self renderSelectorOn: html forTreeMap: treeMap .
 	html div class: self visualizationCssClass;
 		script: treeMap.
-	" load initial data "
+	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonForClass: Collection ];
 			onComplete: treeMap loadJson , treeMap refresh ).

@@ -31,16 +31,17 @@ InfoVisIcicleComponent >> renderExampleOn: html [
 		constrained: true;
 		levelsToShow: 3;
 		duration: 300;
-		beHorizontal.
+		beHorizontal;
+		displayCushions.
 	icicle nodeOptions overridable: true.
-	icicle nodeStylesOptions hoverColor: ColorValue orange.
+	icicle nodeStyleOptions hoverColor: Color orange.
 	icicle eventOptions 
 		onClick: icicle enter asFunction;
 		onRightClick: icicle out asFunction .
 	self setDefaultOptions: icicle.
 	html div class: self visualizationCssClass;
 		script: icicle.
-	" load initial data "
+	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonForClass: Collection ];
 			onComplete: icicle loadJson , icicle refresh ).
