@@ -20,6 +20,13 @@ InfoVisNavigationOptions >> enable: aBoolean [
 	self optionAt: 'enable' put: aBoolean
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNavigationOptions >> enablePanningAvoidingNodes [
+	" useful for graphs when nodes can be dragged "
+
+	self panning: 'avoid nodes'
+]
+
 { #category : #options }
 InfoVisNavigationOptions >> panning: aBooleanOrString [
 	"Default: false.  Set this property to true if you want to add Drag and Drop panning support to the visualization.  You can also set this parameter to 'avoid nodes' to enable DnD panning but disable it if the DnD is taking place over a node.  This is useful when some other events like Drag & Drop for nodes are added to Graph.Nodes."

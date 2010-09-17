@@ -45,6 +45,13 @@ InfoVisTreeMap >> constrained: aBoolean [
 	self optionAt: 'constrained' put: aBoolean
 ]
 
+{ #category : #'options - convenience' }
+InfoVisTreeMap >> displayCushions [
+	" undocumented option "
+
+	self optionAt: 'cushion' put: true
+]
+
 { #category : #options }
 InfoVisTreeMap >> duration: anObject [
 	"Described in Options.Fx.  Default: 700."
@@ -141,7 +148,7 @@ InfoVisTreeMap >> out [
 
 { #category : #functions }
 InfoVisTreeMap >> plot [
-	" Plots the Icicle visualization.  This is a shortcut to fx.plot."
+	" Plots the visualization.  This is a shortcut to fx.plot."
 
 	^ self variableAccess call: 'plot'
 ]

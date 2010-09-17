@@ -45,6 +45,13 @@ InfoVisIcicle >> constrained: aBoolean [
 	self optionAt: 'constrained' put: aBoolean
 ]
 
+{ #category : #'options - convenience' }
+InfoVisIcicle >> displayCushions [
+	" undocumented option "
+
+	self optionAt: 'cushion' put: true
+]
+
 { #category : #options }
 InfoVisIcicle >> duration: anObject [
 	"Described in Options.Fx.  Default: 700."
@@ -117,7 +124,7 @@ InfoVisIcicle >> out [
 
 { #category : #functions }
 InfoVisIcicle >> plot [
-	" Plots the Icicle visualization.  This is a shortcut to fx.plot."
+	" Plots the visualization.  This is a shortcut to fx.plot."
 
 	^ self variableAccess call: 'plot'
 ]

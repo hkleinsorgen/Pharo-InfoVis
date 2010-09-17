@@ -35,6 +35,12 @@ InfoVisVisualization >> createVariable [
 	^ variableName := 'infoVis' , self renderContext callbacks advanceKey
 ]
 
+{ #category : #functions }
+InfoVisVisualization >> cursor: shape [
+
+	^ (((((self variableAccess access: 'canvas') call: 'getElement')) access: 'style') access: 'cursor') assign: shape
+]
+
 { #category : #'options - categories' }
 InfoVisVisualization >> edgeOptions [
 
@@ -159,7 +165,7 @@ InfoVisVisualization >> nodeOptions [
 ]
 
 { #category : #'options - categories' }
-InfoVisVisualization >> nodeStylesOptions [
+InfoVisVisualization >> nodeStyleOptions [
 
 	^ self optionsObject: InfoVisNodeStylesOptions
 ]
@@ -172,7 +178,7 @@ InfoVisVisualization >> refresh [
 ]
 
 { #category : #'options - categories' }
-InfoVisVisualization >> tipsOptions [
+InfoVisVisualization >> tipOptions [
 
 	^ self optionsObject: InfoVisTipsOptions
 ]
