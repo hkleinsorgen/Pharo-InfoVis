@@ -97,13 +97,13 @@ InfoVisOptionsTest >> testNodeOptions [
 { #category : #tests }
 InfoVisOptionsTest >> testNodeStylesOptions [
 
-	self options: #nodeStylesOptions category: 'NodeStyles' set: 'type' to: 'HTML' enable: true
+	self options: #nodeStyleOptions category: 'NodeStyles' set: 'type' to: 'HTML' enable: true
 ]
 
 { #category : #tests }
 InfoVisOptionsTest >> testNodeTipsOptions [
 
-	self options: #tipsOptions category: 'Tips' set: 'offsetX' to: 40 enable: true
+	self options: #tipOptions category: 'Tips' set: 'offsetX' to: 40 enable: true
 ]
 
 { #category : #tests }

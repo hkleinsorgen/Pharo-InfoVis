@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #tests }
+InfoVisUtilsTest >> testCursor [
+
+	self 
+		assert: (self infoVis forceDirected cursor: 'foo')
+		equals: 'infoVis1.canvas.getElement().style.cursor="foo"'
+]
+
+{ #category : #tests }
 InfoVisUtilsTest >> testEvent [
 
 	self 
