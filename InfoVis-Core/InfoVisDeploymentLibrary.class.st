@@ -1,3 +1,6 @@
+"
+Contains the compressed InfoVis library
+"
 Class {
 	#name : #InfoVisDeploymentLibrary,
 	#superclass : #InfoVisAbstractLibrary,
@@ -38,5 +41,5 @@ InfoVisDeploymentLibrary >> jitycJs [
 { #category : #accessing }
 InfoVisDeploymentLibrary >> selectorsToInclude [
 
-	^ #(jitycJs excanvasJs)
+	^ #(excanvasJs jitycJs)
 ]

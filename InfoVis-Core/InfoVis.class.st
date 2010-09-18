@@ -1,3 +1,6 @@
+"
+Facade for objects and utility functions provided by the InfoVis library
+"
 Class {
 	#name : #InfoVis,
 	#superclass : #JSObject,

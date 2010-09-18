@@ -3,7 +3,7 @@ A visualization that lays graphs using a Force-Directed layout algorithm.
 "
 Class {
 	#name : #InfoVisForceDirected,
-	#superclass : #InfoVisGraph,
+	#superclass : #InfoVisLayoutedGraph,
 	#category : 'InfoVis-Core'
 }
 

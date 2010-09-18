@@ -30,7 +30,7 @@ InfoVisObject >> infoVis [
 
 { #category : #private }
 InfoVisObject >> optionAt: aKey put: aValue [
-	^ self options at: aKey put: aValue
+	^ self options at: aKey asString put: aValue
 ]
 
 { #category : #private }

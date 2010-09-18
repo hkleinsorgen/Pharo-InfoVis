@@ -3,7 +3,7 @@ A radial graph visualization with advanced animations.
 "
 Class {
 	#name : #InfoVisRadialGraph,
-	#superclass : #InfoVisVisualization,
+	#superclass : #InfoVisLayoutedGraph,
 	#category : 'InfoVis-Core'
 }
 

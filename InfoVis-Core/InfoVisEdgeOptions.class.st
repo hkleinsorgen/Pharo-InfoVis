@@ -1,3 +1,6 @@
+"
+Provides Edge rendering options for Tree and Graph based visualizations.
+"
 Class {
 	#name : #InfoVisEdgeOptions,
 	#superclass : #InfoVisOptions,
@@ -17,6 +20,12 @@ InfoVisEdgeOptions >> alpha: aNumber [
 	self optionAt: #alpha put: aNumber
 ]
 
+{ #category : #'options - convenience' }
+InfoVisEdgeOptions >> canvasStyles [
+
+	^ self optionsObject: InfoVisCanvasStyles
+]
+
 { #category : #options }
 InfoVisEdgeOptions >> canvasStyles: aObject [
 	"Default: an empty object (i.e.  {}).  Attach any other canvas specific property that you'd set to the canvas context before plotting an Edge."
@@ -32,25 +41,31 @@ InfoVisEdgeOptions >> color: aString [
 ]
 
 { #category : #options }
-InfoVisEdgeOptions >> dim: aNumber [
+InfoVisEdgeOptions >> dimension: aNumber [
 	"Default: 15.  An extra parameter used by other complex shapes such as quadratic, bezier or arrow, to determine the shape's diameter."
 
 	self optionAt: #dim put: aNumber
 ]
 
-{ #category : #convenience }
+{ #category : #'options - convenience' }
 InfoVisEdgeOptions >> displayAsArrows [
 
 	self type: 'arrow'
 ]
 
-{ #category : #convenience }
+{ #category : #'options - convenience' }
+InfoVisEdgeOptions >> displayAsBezier [
+
+	self type: 'bezier'
+]
+
+{ #category : #'options - convenience' }
 InfoVisEdgeOptions >> displayAsHyperlines [
 
 	self type: 'hyperline'
 ]
 
-{ #category : #convenience }
+{ #category : #'options - convenience' }
 InfoVisEdgeOptions >> displayAsLines [
 
 	self type: 'line'

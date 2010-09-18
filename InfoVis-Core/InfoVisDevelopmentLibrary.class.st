@@ -1,3 +1,6 @@
+"
+Contains the uncompressed InfoVis library
+"
 Class {
 	#name : #InfoVisDevelopmentLibrary,
 	#superclass : #InfoVisAbstractLibrary,
@@ -16852,5 +16855,5 @@ $jit.Hypertree.$extend = true;
 { #category : #accessing }
 InfoVisDevelopmentLibrary >> selectorsToInclude [
 
-	^ #(jitJs)
+	^ #(excanvasJs jitJs)
 ]

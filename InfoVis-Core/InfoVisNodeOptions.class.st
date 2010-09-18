@@ -66,6 +66,12 @@ InfoVisNodeOptions >> autoWidth: aBoolean [
 	self optionAt: 'autoWidth' put: aBoolean
 ]
 
+{ #category : #'options - convenience' }
+InfoVisNodeOptions >> canvasStyles [
+
+	^ self optionsObject: InfoVisCanvasStyles
+]
+
 { #category : #options }
 InfoVisNodeOptions >> canvasStyles: aObject [
 	"Default: an empty object (i.e.  {}).  Attach any other canvas specific property that you'd set to the canvas context before plotting a Node."
@@ -87,7 +93,7 @@ InfoVisNodeOptions >> color: aString [
 ]
 
 { #category : #options }
-InfoVisNodeOptions >> dim: aNumber [
+InfoVisNodeOptions >> dimension: aNumber [
 	"Default: 3.  An extra parameter used by other node shapes such as circle or square, to determine the shape's diameter."
 
 	self optionAt: 'dim' put: aNumber

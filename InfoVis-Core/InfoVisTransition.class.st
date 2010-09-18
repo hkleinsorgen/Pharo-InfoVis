@@ -1,3 +1,6 @@
+"
+Interface for transition styles 
+"
 Class {
 	#name : #InfoVisTransition,
 	#superclass : #Object,

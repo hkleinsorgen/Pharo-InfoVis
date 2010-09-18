@@ -3,7 +3,7 @@ A Hyperbolic Tree/Graph visualization
 "
 Class {
 	#name : #InfoVisHyperTree,
-	#superclass : #InfoVisVisualization,
+	#superclass : #InfoVisLayoutedGraph,
 	#category : 'InfoVis-Core'
 }
 
