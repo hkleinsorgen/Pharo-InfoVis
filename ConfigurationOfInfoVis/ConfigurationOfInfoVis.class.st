@@ -115,7 +115,7 @@ ConfigurationOfInfoVis >> baseline100: spec [
 		spec 
 			package: 'InfoVis-Core';
 			package: 'InfoVis-Tests' with: [ spec requires: 'InfoVis-Core'];
-			package: 'InfoVis-jQuery' with: [ spec requires: #('InfoVis-Core' 'JQuery-Core')];
+			package: 'InfoVis-jQuery' with: [ spec requires: #('InfoVis-Core')];
 			package: 'InfoVis-Examples' with: [ spec requires: #('InfoVis-Core' 'InfoVis-jQuery')].
 		spec
 			group: 'default' with: #('Core' 'Examples');
