@@ -8,7 +8,7 @@ Class {
 InfoVisUtilsTest >> testCursor [
 
 	self 
-		assert: (self infoVis forceDirected cursor: 'foo')
+		assert: (self infoVis forceDirected showCursor: 'foo')
 		equals: 'infoVis1.canvas.getElement().style.cursor="foo"'
 ]
 

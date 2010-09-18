@@ -32,24 +32,29 @@ InfoVisOptionsTest >> options: optionsSelector category: optionsKey set: optionN
 	self assert: visual equals: 'var v=new $jit.AreaChart(' , expectedOptions asJavascript , ')'.
 ]
 
+{ #category : #private }
+InfoVisOptionsTest >> optionsSet: optionName to: optionValue [
+
+	| visual expectedOptions |
+	visual := self infoVis areaChart.
+	visual perform: ( optionName , ':' ) asSymbol with: optionValue.
+	visual variableName: 'v'.
+	expectedOptions := GRSmallDictionary new.
+	expectedOptions at: optionName put: optionValue.
+	self assert: visual options equals: expectedOptions asJavascript.
+	self assert: visual equals: 'var v=new $jit.AreaChart(' , expectedOptions asJavascript , ')'.
+]
+
 { #category : #tests }
 InfoVisOptionsTest >> testCanvasOptions [
 
-	| visual javascript |
-	visual := self infoVis areaChart.
-	visual height: 200.
-	visual variableName: 'v'.
-	javascript := visual options asJavascript.
-	self assert: ('{*height*:200}' match: javascript).
-	self 
-		assert: visual
-		equals: 'var v=new $jit.AreaChart(', javascript, ')'
+	self optionsSet: 'height' to: 230 asFunction
 ]
 
 { #category : #tests }
 InfoVisOptionsTest >> testControllerOptions [
 
-	self options: #controllerOptions category: 'Controller' set: 'onAfterCompute' to: 1 asFunction.
+	self optionsSet: 'duration' to: 42 asFunction
 ]
 
 { #category : #tests }
@@ -65,9 +70,9 @@ InfoVisOptionsTest >> testEventOptions [
 ]
 
 { #category : #tests }
-InfoVisOptionsTest >> testFx [
+InfoVisOptionsTest >> testFxOptions [
 
-	self options: #fxOptions category: 'Fx' set: 'duration' to: 2000.
+	self optionsSet: 'duration' to: 2000.
 ]
 
 { #category : #tests }
@@ -115,14 +120,5 @@ InfoVisOptionsTest >> testTreeOptions [
 { #category : #tests }
 InfoVisOptionsTest >> testVisualizationOptions [
 
-	| visual javascript |
-	visual := self infoVis areaChart.
-	visual animate: true.
-	visual variableName: 'v'.
-	javascript := visual options asJavascript.
-	" compatibility issue: keys dont need to be quoted "
-	self assert: ('{*animate*:true}' match: javascript).
-	self 
-		assert: visual
-		equals: 'var v=new $jit.AreaChart(', javascript, ')'
+	self optionsSet: 'animate' to: true asFunction
 ]

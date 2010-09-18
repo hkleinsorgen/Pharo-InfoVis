@@ -66,7 +66,7 @@ InfoVisCreationTest >> testSliceAndDice [
 { #category : #tests }
 InfoVisCreationTest >> testSpaceTree [
 
-	self create: #spaceTree expect: 'Spacetree'
+	self create: #spaceTree expect: 'ST'
 ]
 
 { #category : #tests }
