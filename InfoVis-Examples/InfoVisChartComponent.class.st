@@ -82,7 +82,7 @@ InfoVisChartComponent >> renderLegendOn: html [
 		].
 ]
 
-{ #category : #options }
+{ #category : #rendering }
 InfoVisChartComponent >> toolTipFunction [
 
 	^ ( JSStream on: 'tip.innerHTML = element.name + ": " + element.value' ) asFunction: #( #tip #element )

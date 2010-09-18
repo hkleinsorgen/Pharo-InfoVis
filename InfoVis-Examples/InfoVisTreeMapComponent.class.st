@@ -4,6 +4,25 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
+{ #category : #rendering }
+InfoVisTreeMapComponent >> createVisualizationFor: html [ 
+
+	| treeMap |
+	treeMap := html infoVis squarified.
+	treeMap 
+		animate: true;
+		titleHeight: 12;
+		offset: 1;
+		displayCushions.
+	treeMap nodeOptions overridable: true.
+	treeMap eventOptions 
+		onClick: treeMap enter asFunction;
+		onRightClick: treeMap out asFunction .
+	treeMap beHorizontal.
+	self setDefaultOptions: treeMap.
+	^ treeMap
+]
+
 { #category : #JSON }
 InfoVisTreeMapComponent >> depth [
 
@@ -61,41 +80,7 @@ InfoVisTreeMapComponent >> jsonForClass: aClass [
 ]
 
 { #category : #rendering }
-InfoVisTreeMapComponent >> renderExampleOn: html [ 
-
-	| treeMap |
-	treeMap := html infoVis squarified.
-	treeMap 
-		animate: true;
-		titleHeight: 12;
-		offset: 1;
-		displayCushions.
-	treeMap nodeOptions overridable: true.
-	treeMap eventOptions 
-		onClick: treeMap enter asFunction;
-		onRightClick: treeMap out asFunction .
-	treeMap beHorizontal.
-	self setDefaultOptions: treeMap.
-	self renderSelectorOn: html forTreeMap: treeMap .
-	html div class: self visualizationCssClass;
-		script: treeMap.
-	" load data "
-	html document addLoadScript: 
-		( html jQuery getJson infoVisJson: [ self jsonForClass: Collection ];
-			onComplete: treeMap loadJson , treeMap refresh ).
-]
-
-{ #category : #rendering }
-InfoVisTreeMapComponent >> renderExplanationOn: html [
-
-	html 
-		text: 'Visualizes the number of methods a class implements. ';
-		emphasis: 'Left click'; text: ' to dive, ';
-		emphasis: 'right click'; text: ' to navigate to the parent'.
-]
-
-{ #category : #rendering }
-InfoVisTreeMapComponent >> renderSelectorOn: html forTreeMap: treeMap [ 
+InfoVisTreeMapComponent >> renderControlsFor: treeMap on: html [ 
 	" Controls that change the type of the TreeMap "
  
 	| group |
@@ -109,6 +94,25 @@ InfoVisTreeMapComponent >> renderSelectorOn: html forTreeMap: treeMap [
 	group radioButton 
 		onClick: ( treeMap extendWithSliceAndDice, treeMap refresh );
 		with: 'Slice and dice'.
+	html text: ' '.
+]
+
+{ #category : #rendering }
+InfoVisTreeMapComponent >> renderExplanationOn: html [
+
+	html 
+		text: 'Visualizes the number of methods a class implements. Left click to dive, right click to navigate to the parent'.
+]
+
+{ #category : #rendering }
+InfoVisTreeMapComponent >> renderVisualization: treeMap on: html [ 
+
+	html div class: self visualizationCssClass;
+		script: treeMap.
+	" load data "
+	html document addLoadScript: 
+		( html jQuery getJson infoVisJson: [ self jsonForClass: self rootClass ];
+			onComplete: treeMap loadJson , treeMap refresh ).
 ]
 
 { #category : #accessing }

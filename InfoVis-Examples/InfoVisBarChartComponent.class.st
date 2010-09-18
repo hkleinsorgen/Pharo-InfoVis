@@ -4,6 +4,23 @@ Class {
 	#category : 'InfoVis-Examples'
 }
 
+{ #category : #rendering }
+InfoVisBarChartComponent >> createVisualizationFor: html [ 
+
+	| chart |
+	chart := html infoVis barChart.
+	chart
+		animate: true;
+		labelOffset: 10;
+		beVertical;
+		barsOffset: 20;
+		showAggregates: false;
+		showLabels: true;
+		displayGroupedWithGradients.
+	self setDefaultOptions: chart.
+	^ chart
+]
+
 { #category : #JSON }
 InfoVisBarChartComponent >> jsonData [
 
@@ -18,9 +35,12 @@ InfoVisBarChartComponent >> jsonData [
 	classes do: 
 		[: class | | classData |
 			classData := OrderedCollection new.
-			classData add: class subclasses size;
-				add: class allSubclasses size.
-			values add: ( Dictionary new at: 'label' put: class name;
+			classData 
+				add: class subclasses size;
+				add: class allSubclasses size;
+				add: class selectors size + class class selectors size.
+			values add: ( Dictionary new 
+						at: 'label' put: class name;
 						at: 'values' put: classData;
 						yourself )
 		].
@@ -33,23 +53,18 @@ InfoVisBarChartComponent >> jsonData [
 { #category : #accessing }
 InfoVisBarChartComponent >> labels [
 
-	^ #( 'Direct subclasses' 'All subclasses' )
+	^ #( 'Direct subclasses' 'All subclasses' 'Methods')
 ]
 
 { #category : #rendering }
-InfoVisBarChartComponent >> renderExampleOn: html [ 
+InfoVisBarChartComponent >> renderExplanationOn: html [
 
-	| chart |
-	chart := html infoVis barChart.
-	chart
-		animate: true;
-		labelOffset: 10;
-		beVertical;
-		barsOffset: 20;
-		showAggregates: false;
-		showLabels: true;
-		displayGroupedWithGradients.
-	self setDefaultOptions: chart.
+	html render: 'A bar chart feeded by JSON data fetched with an  Ajax request'.
+]
+
+{ #category : #rendering }
+InfoVisBarChartComponent >> renderVisualization: chart on: html [ 
+
 	html div class: self visualizationCssClass;
 		script: chart.
 	self renderLegendOn: html.
@@ -58,12 +73,6 @@ InfoVisBarChartComponent >> renderExampleOn: html [
 		( html jQuery getJson infoVisJson: [ self jsonData ];
 			onComplete: chart loadJson,
 				 ( self legendScriptFor: chart )).
-]
-
-{ #category : #rendering }
-InfoVisBarChartComponent >> renderExplanationOn: html [
-
-	html render: 'A bar chart feeded by dynamic JSON data fetched with an  Ajax request'.
 ]
 
 { #category : #accessing }

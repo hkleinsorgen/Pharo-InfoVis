@@ -1,11 +1,6 @@
 Class {
 	#name : #InfoVisSpaceFillingComponent,
 	#superclass : #InfoVisExampleComponent,
-	#instVars : [
-		'passengers',
-		'nextID',
-		'classes'
-	],
 	#category : 'InfoVis-Examples'
 }
 
@@ -25,14 +20,7 @@ InfoVisSpaceFillingComponent >> category [
 	^ 'Space filling trees'
 ]
 
-{ #category : #private }
-InfoVisSpaceFillingComponent >> classes [
-
-	classes isNil ifTrue: [ classes := Dictionary new: 1000 ].
-	^ classes
-]
-
-{ #category : #options }
+{ #category : #JSON }
 InfoVisSpaceFillingComponent >> colorOfClass: aClass [ 
 
 	^ aClass isBits 
@@ -44,7 +32,7 @@ InfoVisSpaceFillingComponent >> colorOfClass: aClass [
 		]
 ]
 
-{ #category : #private }
+{ #category : #JSON }
 InfoVisSpaceFillingComponent >> commentOfClass: aClass [ 
 
 	| comment |
@@ -60,20 +48,6 @@ InfoVisSpaceFillingComponent >> depth [
 	self subclassResponsibility
 ]
 
-{ #category : #private }
-InfoVisSpaceFillingComponent >> idForPassenger: anObject [ 
-
-	^ self classes at: anObject ifAbsentPut: [
-		| link |
-		nextID := nextID isNil 
-				ifTrue: [ 1 ]
-				ifFalse: [ nextID + 1 ].
-		link := nextID printString.
-		self passengers at: link put: anObject.
-		link
-	].
-]
-
 { #category : #JSON }
 InfoVisSpaceFillingComponent >> jsonForClass: aClass [ 
 
@@ -83,14 +57,17 @@ InfoVisSpaceFillingComponent >> jsonForClass: aClass [
 { #category : #JSON }
 InfoVisSpaceFillingComponent >> jsonForClass: aClass depth: depth [ 
 
-	| data children object classSize |
+	| data children object classSize superclass |
 	data := Dictionary new.
 	classSize := 1.
 	aClass allSubclassesDo: [: s | classSize := classSize + 1 ].
 	self addSize: data toData: classSize.
 	data at: '$color' put: ( self colorOfClass: aClass ).
+	superclass := aClass = self rootClass 
+			ifTrue: [ aClass ]
+			ifFalse: [ aClass superclass ].
+	data at: 'parentId' put: ( self idForPassenger: superclass ).
 	data at: 'comment' put: ( self commentOfClass: aClass ).
-	data at: 'link' put: ( self idForPassenger: aClass ).
 	children := depth > 0 
 			ifTrue: 
 			[( aClass subclasses asSortedCollection: [: c1 : c2 | c1 name <= c2 name ]) collect: [: c | self jsonForClass: c depth: depth - 1 ]
@@ -98,14 +75,14 @@ InfoVisSpaceFillingComponent >> jsonForClass: aClass depth: depth [
 			ifFalse: [ #( )].
 	object := Dictionary new.
 	object at: 'name' put: aClass name.
-	object at: 'id' put: aClass name.
+	object at: 'id' put: ( self idForPassenger: aClass ).
 	object at: 'data' put: data.
 	object at: 'children' put: children.
 	^ object
 ]
 
 { #category : #JSON }
-InfoVisSpaceFillingComponent >> jsonForLink: aString [
+InfoVisSpaceFillingComponent >> jsonForID: aString [
 	
 	| class |
 	class := self passengerAt: aString.
@@ -118,17 +95,10 @@ InfoVisSpaceFillingComponent >> labelSize [
 	^ 10
 ]
 
-{ #category : #private }
-InfoVisSpaceFillingComponent >> passengerAt: id [
+{ #category : #JSON }
+InfoVisSpaceFillingComponent >> rootClass [
 
-	^ self passengers at: id ifAbsent: [ nil ]
-]
-
-{ #category : #private }
-InfoVisSpaceFillingComponent >> passengers [
-
-	passengers isNil ifTrue: [ passengers := Dictionary new: 1000 ].
-	^ passengers
+	^ Collection
 ]
 
 { #category : #rendering }

@@ -70,15 +70,12 @@ InfoVisExamplesBrowserComponent >> renderContentOn: html [
 		with: 
 			[	html div class: 'navigation';
 					with: [ self renderNavigationOn: html ].
-				html div class: 'example';
-					with: [ self renderExampleOn: html ]
+				self currentComponent ifNotNil: 
+					[: c |
+						html div class: 'example';
+							with: [ c renderOn: html ]
+					]
 			].
-]
-
-{ #category : #rendering }
-InfoVisExamplesBrowserComponent >> renderExampleOn: html [ 
-
-	self currentComponent ifNotNil: [ : c | c renderOn: html ]
 ]
 
 { #category : #rendering }
@@ -86,22 +83,27 @@ InfoVisExamplesBrowserComponent >> renderNavigationOn: html [
 
 	html heading level2;
 		with: 'InfoVis'.
-	self categories do:
-		[: category  |
-			html heading level3; with: category.
+	self categories do: 
+		[: category |
+			html heading level3;
+				with: category.
 			html unorderedList class: 'navigation';
 				with: 
-					[	(self exampleComponents at: category) do: 
+					[( self exampleComponents at: category ) do: 
 							[: component |
 								html listItem class: 'navigation';
-									with: 
-										[	html anchor class: ( component = self currentComponent 
-															ifTrue: [ 'selection' ]
-															ifFalse: [ 'navigation' ]);
-												callback: [ self currentComponent: component ];
-												with: [ component title renderOn: html ]
-										]
+									with: [ self renderNavigationTitleOf: component on: html ]
 							]
 					]
 		].
+]
+
+{ #category : #rendering }
+InfoVisExamplesBrowserComponent >> renderNavigationTitleOf: component on: html [ 
+
+	html anchor class: ( component = self currentComponent 
+					ifTrue: [ 'selection' ]
+					ifFalse: [ 'navigation' ]);
+		callback: [ self currentComponent: component ];
+		with: [ component title renderOn: html ].
 ]

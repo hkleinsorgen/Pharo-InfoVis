@@ -30,11 +30,7 @@ div.example {
 	margin-left: 15px;
 }
 
-div.InfoVis {
-	background-color: black;
-	width: 100%;
-	height: 600px;
-}
+
 div.code {
 	background-color: #EEEEEE;
 	padding: 5px;
@@ -111,6 +107,7 @@ li.navigation {
 	font-size: 1.1em;
 }
 
+
 '
 ]
 
@@ -124,6 +121,20 @@ InfoVisExampleLibrary >> selectorsToInclude [
 InfoVisExampleLibrary >> visCss [
 
 	^ '
+
+div.InfoVis {
+	background-color: black;
+	width: 790px;
+	height: 500px;
+	overflow: hidden;
+}
+
+div.InfoVisBright {
+	background-color: #E0F0FF;
+	width: 790px;
+	height: 500px;
+	overflow: hidden;
+}
 
 div.tip {
 	display: block;
