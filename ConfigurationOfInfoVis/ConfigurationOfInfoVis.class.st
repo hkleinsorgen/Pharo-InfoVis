@@ -114,9 +114,9 @@ ConfigurationOfInfoVis >> baseline100: spec [
 		spec repository: 'http://www.squeaksource.com/InfoVis'.	
 		spec 
 			package: 'InfoVis-Core';
-			package: 'InfoVis-Tests' with: [ spec requires: 'DojoToolkit-Core'];
-			package: 'InfoVis-jQuery' with: [ spec requires: #('DojoToolkit-Core' 'JQuery-Core')];
-			package: 'InfoVis-Examples' with: [ spec requires: #('DojoToolkit-Core' 'DojoToolkit-jQuery')].
+			package: 'InfoVis-Tests' with: [ spec requires: 'InfoVis-Core'];
+			package: 'InfoVis-jQuery' with: [ spec requires: #('InfoVis-Core' 'JQuery-Core')];
+			package: 'InfoVis-Examples' with: [ spec requires: #('InfoVis-Core' 'InfoVis-jQuery')].
 		spec
 			group: 'default' with: #('Core' 'Examples');
 			group: 'Core' with: #(
