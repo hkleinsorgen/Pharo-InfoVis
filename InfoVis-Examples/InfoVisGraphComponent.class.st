@@ -19,15 +19,9 @@ InfoVisGraphComponent >> category [
 { #category : #JSON }
 InfoVisGraphComponent >> colorOfClass: aClass [ 
 
-	| size saturation hue |
+	| size |
 	size := aClass allSubclasses size.
-	hue := 197 / 360.
-	^ size > 0 
-		ifTrue: 
-		[	saturation := size / 10 + 0.3 min: 1.
-			self colorHue: hue saturation: saturation brightness: 0.87
-		]
-		ifFalse: [ self colorHue: hue saturation: 0.2 brightness: 0.5 ]
+	^ self colorOfClass: aClass size: size
 ]
 
 { #category : #JSON }

@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #JSON }
-InfoVisIcicleComponent >> addSize: data toData: classSize [ 
+InfoVisIcicleComponent >> addSize: classSize toData: data [ 
 
 	| size |
 	size := ((classSize + 1) log: 2).
@@ -46,7 +46,7 @@ InfoVisIcicleComponent >> depth [
 InfoVisIcicleComponent >> renderExplanationOn: html [
 
 	html 
-		text:'A space filling visualization. The width is fixed, the height visualizes the number of subclasses. Different colors represent different types of classes. Left click to dive, right click to navigate to the parent'.
+		text:'A space filling visualization. The width is fixed, the height visualizes the number of subclasses. Left click to dive, right click to navigate to the parent'.
 ]
 
 { #category : #rendering }

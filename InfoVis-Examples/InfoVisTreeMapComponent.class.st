@@ -115,10 +115,16 @@ InfoVisTreeMapComponent >> renderVisualization: treeMap on: html [
 			onComplete: treeMap loadJson , treeMap refresh ).
 ]
 
-{ #category : #accessing }
+{ #category : #JSON }
+InfoVisTreeMapComponent >> rootClass [
+
+	^ WAComponent
+]
+
+{ #category : #JSON }
 InfoVisTreeMapComponent >> selectorsLimit [
 
-	^ 30
+	^ 10
 ]
 
 { #category : #accessing }

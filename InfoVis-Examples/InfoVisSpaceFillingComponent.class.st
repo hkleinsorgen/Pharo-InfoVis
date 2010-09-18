@@ -11,7 +11,7 @@ InfoVisSpaceFillingComponent class >> isAbstract [
 ]
 
 { #category : #JSON }
-InfoVisSpaceFillingComponent >> addSize: data toData: classSize [
+InfoVisSpaceFillingComponent >> addSize: classSize toData: data [
 ]
 
 { #category : #accessing }
@@ -21,15 +21,16 @@ InfoVisSpaceFillingComponent >> category [
 ]
 
 { #category : #JSON }
-InfoVisSpaceFillingComponent >> colorOfClass: aClass [ 
+InfoVisSpaceFillingComponent >> colorOfClass: aClass size: size [
 
-	^ aClass isBits 
-		ifTrue: [ '#5B69FF' ]
-		ifFalse: 
-		[	aClass isVariable 
-				ifTrue: [ '#5BB5FF' ]
-				ifFalse: [ '#47C676' ]
+	| saturation hue |
+	hue := 197 / 360.
+	^ size > 0 
+		ifTrue: 
+		[	saturation := size / 10 + 0.3 min: 1.
+			self colorHue: hue saturation: saturation brightness: 0.87
 		]
+		ifFalse: [ self colorHue: hue saturation: 0.2 brightness: 0.5 ]
 ]
 
 { #category : #JSON }
@@ -61,8 +62,8 @@ InfoVisSpaceFillingComponent >> jsonForClass: aClass depth: depth [
 	data := Dictionary new.
 	classSize := 1.
 	aClass allSubclassesDo: [: s | classSize := classSize + 1 ].
-	self addSize: data toData: classSize.
-	data at: '$color' put: ( self colorOfClass: aClass ).
+	self addSize: classSize toData: data.
+	data at: '$color' put: ( self colorOfClass: aClass size: classSize ).
 	superclass := aClass = self rootClass 
 			ifTrue: [ aClass ]
 			ifFalse: [ aClass superclass ].

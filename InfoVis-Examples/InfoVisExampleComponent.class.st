@@ -38,15 +38,28 @@ InfoVisExampleComponent >> colorHue: h saturation: s brightness: b [
 	^self colorRed: b green: k blue: m
 ]
 
+{ #category : #JSON }
+InfoVisExampleComponent >> colorOfClass: aClass size: size [
+
+	| saturation hue |
+	hue := 197 / 360.
+	^ size > 0 
+		ifTrue: 
+		[	saturation := size / 10 + 0.3 min: 1.
+			self colorHue: hue saturation: saturation brightness: 0.87
+		]
+		ifFalse: [ self colorHue: hue saturation: 0.2 brightness: 0.5 ]
+]
+
 { #category : #private }
 InfoVisExampleComponent >> colorRed: r green: g blue: b [ 
 
 	^ String streamContents: 
 		[: stream |
 			stream nextPut: $#.
-			((r * 256) floor min: 255) printOn: stream paddedWith: $0 to: 2 base: 16.
-			((g * 256) floor min: 255) printOn: stream paddedWith: $0 to: 2 base: 16.
-			((b * 256) floor min: 255) printOn: stream paddedWith: $0 to: 2 base: 16.
+			stream nextPutAll: (((r * 256) floor min: 255) printPaddedWith: $0 to: 2 base: 16).
+			stream nextPutAll: (((g * 256) floor min: 255) printPaddedWith: $0 to: 2 base: 16).
+			stream nextPutAll: (((b * 256) floor min: 255) printPaddedWith: $0 to: 2 base: 16).
 		]
 ]
 

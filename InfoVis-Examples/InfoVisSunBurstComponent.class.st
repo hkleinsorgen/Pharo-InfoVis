@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #JSON }
-InfoVisSunBurstComponent >> addSize: data toData: classSize [ 
+InfoVisSunBurstComponent >> addSize: classSize toData: data [ 
 
 	data at: '$angularWidth' put: classSize.
 ]
