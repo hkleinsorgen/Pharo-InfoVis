@@ -161,3 +161,22 @@ ConfigurationOfInfoVis >> version100: spec [
 	].
 
 ]
+
+{ #category : #versions }
+ConfigurationOfInfoVis >> version110: spec [
+	<version: '1.1' imports: #('1.0-baseline' )>
+
+	spec for: #common do: [
+		spec blessing: #release.
+		spec description: 'release with InfoVis 2.0.1'.
+		spec author: 'hkl'.
+		spec timestamp: '06/25/2011 15:12'.
+		
+		spec 
+			package: 'InfoVis-Core'with: 'InfoVis-Core-hkl.11';
+			package: 'InfoVis-jQuery'with: 'InfoVis-jQuery-hkl.1';
+			package: 'InfoVis-Tests'with: 'InfoVis-Tests-hkl.4';
+			package: 'InfoVis-Examples'with: 'InfoVis-Examples-hkl.10'.
+	].
+
+]
