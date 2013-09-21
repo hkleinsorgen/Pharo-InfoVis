@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisIcicleComponent,
 	#superclass : #InfoVisSpaceFillingComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #JSON }
@@ -57,7 +57,7 @@ InfoVisIcicleComponent >> renderVisualization: icicle on: html [
 	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonForClass: self rootClass ];
-			onComplete: icicle loadJson , icicle refresh ).
+			onSuccess: icicle loadJson , icicle refresh ).
 ]
 
 { #category : #accessing }

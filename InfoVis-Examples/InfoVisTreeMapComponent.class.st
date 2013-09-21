@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisTreeMapComponent,
 	#superclass : #InfoVisSpaceFillingComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #rendering }
@@ -112,7 +112,7 @@ InfoVisTreeMapComponent >> renderVisualization: treeMap on: html [
 	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonForClass: self rootClass ];
-			onComplete: treeMap loadJson , treeMap refresh ).
+			onSuccess: treeMap loadJson , treeMap refresh ).
 ]
 
 { #category : #JSON }

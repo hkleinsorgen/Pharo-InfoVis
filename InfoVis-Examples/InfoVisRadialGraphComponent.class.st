@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisRadialGraphComponent,
 	#superclass : #InfoVisRadialComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #rendering }
@@ -57,7 +57,7 @@ InfoVisRadialGraphComponent >> renderVisualization: graph on: html [
 	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonData ];
-			onComplete: 
+			onSuccess: 
 				graph loadJson, 
 				( graph compute: 'end' ) , 
 				( graph animateFor: 2000 modes: #( 'polar' ))).

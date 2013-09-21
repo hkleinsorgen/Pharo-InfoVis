@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisBarChartComponent,
 	#superclass : #InfoVisChartComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #rendering }
@@ -71,7 +71,7 @@ InfoVisBarChartComponent >> renderVisualization: chart on: html [
 	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonData ];
-			onComplete: chart loadJson,
+			onSuccess: chart loadJson,
 				 ( self legendScriptFor: chart )).
 ]
 

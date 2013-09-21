@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisForceDirectedComponent,
 	#superclass : #InfoVisGraphComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #JSON }
@@ -130,7 +130,7 @@ InfoVisForceDirectedComponent >> renderVisualization: graph on: html [
 	" load data "
 	html document addLoadScript: 
 		( html jQuery getJson infoVisJson: [ self jsonData ];
-			onComplete: graph loadJson , ( self layoutGraph: graph )).
+			onSuccess: graph loadJson , ( self layoutGraph: graph )).
 ]
 
 { #category : #accessing }

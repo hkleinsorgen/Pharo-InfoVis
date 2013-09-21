@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisSunBurstComponent,
 	#superclass : #InfoVisSpaceFillingComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #JSON }
@@ -38,7 +38,7 @@ InfoVisSunBurstComponent >> createVisualizationFor: html [
 			html jQuery getJson 
 				infoVisJson: [ : id | self jsonForID: id ]
 					value: (self clickTargetIDScriptFor: sunBurst);
-				onComplete: sunBurst loadJson, sunBurst refresh)) asFunction: #(hovered event)).
+				onSuccess: sunBurst loadJson, sunBurst refresh)) asFunction: #(hovered event)).
 	self setDefaultOptions: sunBurst.
 	^ sunBurst
 ]
@@ -70,7 +70,7 @@ InfoVisSunBurstComponent >> renderVisualization: sunBurst on: html [
 	" load data "
 	html document addLoadScript: (html jQuery getJson 
 				infoVisJson: [ self jsonForClass: self rootClass ];
-				onComplete: sunBurst loadJson, sunBurst refresh).
+				onSuccess: sunBurst loadJson, sunBurst refresh).
 ]
 
 { #category : #rendering }

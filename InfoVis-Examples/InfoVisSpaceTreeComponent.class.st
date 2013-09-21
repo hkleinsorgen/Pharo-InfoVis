@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisSpaceTreeComponent,
 	#superclass : #InfoVisGraphComponent,
-	#category : 'InfoVis-Examples'
+	#category : #'InfoVis-Examples'
 }
 
 { #category : #rendering }
@@ -71,7 +71,7 @@ InfoVisSpaceTreeComponent >> renderVisualization: tree on: html [
 		script: tree.
 	" load data "
 	html document addLoadScript: ( html jQuery getJson infoVisJson: [ self jsonData ];
-		onComplete: 
+		onSuccess: 
 			tree loadJson , 
 			tree compute , 
 			(tree onClick: (self idForPassenger: SequenceableCollection ))).
