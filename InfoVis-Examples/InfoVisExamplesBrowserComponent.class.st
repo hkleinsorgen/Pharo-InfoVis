@@ -5,7 +5,7 @@ Class {
 		'exampleComponents',
 		'currentComponent'
 	],
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #'class initialization' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisChartComponent,
 	#superclass : #InfoVisExampleComponent,
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #'instance creation' }

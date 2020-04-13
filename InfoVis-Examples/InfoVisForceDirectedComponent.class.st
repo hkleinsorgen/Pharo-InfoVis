@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisForceDirectedComponent,
 	#superclass : #InfoVisGraphComponent,
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #JSON }

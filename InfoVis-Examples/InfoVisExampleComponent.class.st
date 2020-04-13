@@ -6,7 +6,7 @@ Class {
 		'passengerIDs',
 		'nextID'
 	],
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #'instance creation' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisHyperTreeComponent,
 	#superclass : #InfoVisRadialComponent,
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #rendering }

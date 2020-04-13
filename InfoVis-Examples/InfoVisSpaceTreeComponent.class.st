@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisSpaceTreeComponent,
 	#superclass : #InfoVisGraphComponent,
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #rendering }

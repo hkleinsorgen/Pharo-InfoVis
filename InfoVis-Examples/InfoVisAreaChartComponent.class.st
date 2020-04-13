@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisAreaChartComponent,
 	#superclass : #InfoVisChartComponent,
-	#category : #'InfoVis-Examples'
+	#category : #''
 }
 
 { #category : #rendering }
