@@ -80,17 +80,27 @@ InfoVisBarChart >> orientation: aString [
 ]
 
 { #category : #options }
-InfoVisBarChart >> showAggregates: aBoolean [
-	"Default: true.  Display the sum of the values of the different stacks."
+InfoVisBarChart >> showAggregates: aBooleanOrFunction [
+	"Default: true.  Display the sum the values of each bar.
+	Can also be a function that returns true or false to display the value of the bar or not.
+	That same function can also return a string with the formatted data to be added."
 
-	self optionAt: 'showAggregates' put: aBoolean
+	self optionAt: 'showAggregates' put: aBooleanOrFunction
 ]
 
 { #category : #options }
-InfoVisBarChart >> showLabels: aBoolean [
-	"Default: true.  Display the name of the slots."
+InfoVisBarChart >> showLabels: aBooleanOrFunction [
+	"Default: true. Display the name of the slots.
+	Can also be a function that returns true or false for each bar to decide whether to show the label or not."
 
-	self optionAt: 'showLabels' put: aBoolean
+	self optionAt: 'showLabels' put: aBooleanOrFunction
+]
+
+{ #category : #options }
+InfoVisBarChart >> sliceOffset: aNumber [
+	"Default: 0.  Separation between the center of the canvas and each pie slice."
+
+	self optionAt: 'sliceOffset' put: aNumber
 ]
 
 { #category : #options }
@@ -98,4 +108,12 @@ InfoVisBarChart >> type: aString [
 	"Default: *'stacked'*.  Stack or grouped styles.  Posible values are 'stacked', 'grouped', 'stacked:gradient', 'grouped:gradient' to add gradients."
 
 	self optionAt: 'type' put: aString
+]
+
+{ #category : #options }
+InfoVisBarChart >> updateHeights: aBoolean [
+	"Default: false. Only for mono-valued (most common) pie charts.
+	Resize the height of the pie slices according to their current values"
+
+	self optionAt: 'updateHeights' put: aBoolean
 ]

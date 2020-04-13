@@ -63,17 +63,20 @@ InfoVisAreaChart >> selectOnHover: aBoolean [
 ]
 
 { #category : #options }
-InfoVisAreaChart >> showAggregates: aBoolean [
-	"Default: true.  Display the sum of the values of the different stacks."
+InfoVisAreaChart >> showAggregates: aBooleanOrFunction [
+	"Default: true. Display the values of the stacks.
+	Can also be a function that returns true or false to display or filter some values.
+	That same function can also return a string with the formatted value"
 
-	self optionAt: 'showAggregates' put: aBoolean
+	self optionAt: 'showAggregates' put: aBooleanOrFunction
 ]
 
 { #category : #options }
-InfoVisAreaChart >> showLabels: aBoolean [
-	"Default: true.  Display the name of the slots."
+InfoVisAreaChart >> showLabels: aBooleanOrFunction [
+	"Default: true. Display the name of the slots.
+	Can also be a function that returns true or false to display or not each label."
 
-	self optionAt: 'showLabels' put: aBoolean
+	self optionAt: 'showLabels' put: aBooleanOrFunction
 ]
 
 { #category : #options }

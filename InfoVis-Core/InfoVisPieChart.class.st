@@ -43,7 +43,8 @@ InfoVisPieChart >> offset: aNumber [
 
 { #category : #options }
 InfoVisPieChart >> resizeLabels: aBooleanOrNumber [
-	"Default: false.  Resize the pie labels according to their stacked values.  Set a number for resizeLabels to set a font size minimum."
+	"Default: false.  Resize the pie labels according to their stacked values.
+	Set a number for resizeLabels to set a font size minimum."
 
 	self optionAt: 'resizeLabels' put: aBooleanOrNumber
 ]
@@ -71,7 +72,8 @@ InfoVisPieChart >> type: aString [
 
 { #category : #options }
 InfoVisPieChart >> updateHeights: aBoolean [
-	"Default: false.  Only for mono-valued (most common) pie charts.  Resize the height of the pie slices according to their current values."
+	"Default: false.  Only for mono-valued (most common) pie charts.
+	Resize the height of the pie slices according to their current values."
 
 	self optionAt: 'updateHeights' put: aBoolean
 ]
