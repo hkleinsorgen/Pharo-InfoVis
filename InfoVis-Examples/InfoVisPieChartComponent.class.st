@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisPieChartComponent,
 	#superclass : #InfoVisChartComponent,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #rendering }
@@ -15,6 +15,7 @@ InfoVisPieChartComponent >> createVisualizationFor: html [
 		offset: 30;
 		sliceOffset: 2;
 		labelOffset: 10;
+		resizeLabels: 18;
 		showLabels: true;
 		displayStackedWithGradients.
 	self setDefaultOptions: chart.

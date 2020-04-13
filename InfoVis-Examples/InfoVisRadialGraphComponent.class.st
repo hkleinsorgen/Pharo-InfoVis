@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisRadialGraphComponent,
 	#superclass : #InfoVisRadialComponent,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #rendering }

@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisOverviewComponent,
 	#superclass : #InfoVisExampleComponent,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #accessing }

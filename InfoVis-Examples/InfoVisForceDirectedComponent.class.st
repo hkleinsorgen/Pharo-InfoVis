@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisForceDirectedComponent,
 	#superclass : #InfoVisGraphComponent,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #JSON }
@@ -69,9 +69,8 @@ InfoVisForceDirectedComponent >> jsonData [
 				ifTrue: 
 				[	node := self nodeForPackage: package.
 					adjacencies := (package dependencies 
-							select: 	[: dep | self includePackage: dep ] )
+							select: [: dep | self includePackage: dep ])
 							collect: [ : dep | self edgeForPackage: dep ].
-
 					node at: 'adjacencies' put: adjacencies.
 					graph add: node
 				]

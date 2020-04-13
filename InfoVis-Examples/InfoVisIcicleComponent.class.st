@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisIcicleComponent,
 	#superclass : #InfoVisSpaceFillingComponent,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #JSON }

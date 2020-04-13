@@ -1,7 +1,7 @@
 Class {
 	#name : #InfoVisExampleLibrary,
 	#superclass : #WAFileLibrary,
-	#category : #'InfoVis-Examples'
+	#category : 'InfoVis-Examples'
 }
 
 { #category : #accessing }
